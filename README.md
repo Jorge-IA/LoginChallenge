@@ -44,7 +44,7 @@ database.sql  → Script para crear la base de datos y la tabla de usuarios.
 
 1. **Clona el repositorio**  
    ```bash
-   git clone [URL_DEL_REPOSITORIO]
+   git clone [https://github.com/Jorge-IA/LoginChallenge.git]
    ```
 
 2. **Configura la base de datos**  
