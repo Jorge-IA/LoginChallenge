@@ -15,4 +15,3 @@ $userController = new UserController($db);
 
 // Llamar al método del controlador que maneja la solicitud
 $userController->handleRequest();
-?>

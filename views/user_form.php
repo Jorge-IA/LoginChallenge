@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <div class="mb-3">
-                   <label for="email" class="form-label"><i class="fa fa-envelope"></i> Correo electrónico</label>
+                    <label for="email" class="form-label"><i class="fa fa-envelope"></i> Correo electrónico</label>
                     <input type="email" class="form-control" id="email" name="email" required
                         value="<?= $editing ? htmlspecialchars($editUser['email']) : ""; ?>">
                 </div>
@@ -69,15 +69,15 @@ if (isset($_GET['id'])) {
                     <i class="fa fa-lock"></i> <label for="password" class="form-label"><?= $editing ? "Nueva contraseña (opcional)" : "Contraseña"; ?></label>
                     <input type="password" class="form-control" id="password" name="password" <?= $editing ? "" : "required"; ?>>
                 </div>
-                
+
                 <?php if ($isAdmin): ?>
-                <div class="mb-3">
-                    <label for="role" class="form-label">Rol</label>
-                    <select class="form-select" id="role" name="role">
-                        <option value="user" <?= ($editing && $editUser['role'] === 'user') ? "selected" : ""; ?>><i class="fa fa-envelope"></i> Usuario</option>
-                        <option value="admin" <?= ($editing && $editUser['role'] === 'admin') ? "selected" : ""; ?>><i class="fa fa-envelope"></i> Administrador</option>
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Rol</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="user" <?= ($editing && $editUser['role'] === 'user') ? "selected" : ""; ?>><i class="fa fa-envelope"></i> Usuario</option>
+                            <option value="admin" <?= ($editing && $editUser['role'] === 'admin') ? "selected" : ""; ?>><i class="fa fa-envelope"></i> Administrador</option>
+                        </select>
+                    </div>
                 <?php endif; ?>
 
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> <?= $editing ? "Actualizar" : "Crear"; ?></button>

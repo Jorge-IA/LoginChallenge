@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../public/css/styles.css">
 </head>
+
 <body>
     <!-- Contenedor para el fondo animado de Vanta.js -->
     <div id="vanta-background"></div>
@@ -40,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert alert-danger text-center">
                     <?= htmlspecialchars($error) ?>
                     <hr class="my-2">
-                    <p class="mb-0">¿No tienes una cuenta? <a href="register.php" class="link-register">Regístrate aquí</a></p>
+                    <p class="mb-0">¿No tienes una cuenta? <br /> <a href="register.php" class="link-register">Regístrate aquí</a></p>
                 </div>
             <?php endif; ?>
             <form method="POST" action="login.php">
@@ -86,4 +88,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
+
 </html>

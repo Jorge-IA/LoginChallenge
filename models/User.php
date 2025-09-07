@@ -12,46 +12,45 @@ class User
     }
 
 
-// Create a new user with a role
-public function create($name, $email, $password, $role)
-{
-    $this->conn->beginTransaction();
+    // Create a new user with a role
+    public function create($name, $email, $password, $role)
+    {
+        $this->conn->beginTransaction();
 
-    try {
-        // 1. Insertar el nuevo usuario en la tabla 'users'
-        $sql = "INSERT INTO {$this->table} (name, email, password, created_at) VALUES (:name, :email, :password, NOW())";
-        $stmt = $this->conn->prepare($sql);
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-        $stmt->execute();
+        try {
+            // 1. Insertar el nuevo usuario en la tabla 'users'
+            $sql = "INSERT INTO {$this->table} (name, email, password, created_at) VALUES (:name, :email, :password, NOW())";
+            $stmt = $this->conn->prepare($sql);
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->execute();
 
-        // 2. Obtener el ID del usuario recién creado
-        $newUserId = $this->conn->lastInsertId();
+            // 2. Obtener el ID del usuario recién creado
+            $newUserId = $this->conn->lastInsertId();
 
-        // 3. Obtener el ID del rol
-        $sqlRole = "SELECT id FROM roles WHERE name = :role LIMIT 1";
-        $stmtRole = $this->conn->prepare($sqlRole);
-        $stmtRole->bindParam(':role', $role);
-        $stmtRole->execute();
-        $roleId = $stmtRole->fetchColumn();
+            // 3. Obtener el ID del rol
+            $sqlRole = "SELECT id FROM roles WHERE name = :role LIMIT 1";
+            $stmtRole = $this->conn->prepare($sqlRole);
+            $stmtRole->bindParam(':role', $role);
+            $stmtRole->execute();
+            $roleId = $stmtRole->fetchColumn();
 
-        // 4. Insertar la relación en la tabla 'user_roles'
-        $sqlUserRole = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, :role_id)";
-        $stmtUserRole = $this->conn->prepare($sqlUserRole);
-        $stmtUserRole->bindParam(':user_id', $newUserId);
-        $stmtUserRole->bindParam(':role_id', $roleId);
-        $stmtUserRole->execute();
+            // 4. Insertar la relación en la tabla 'user_roles'
+            $sqlUserRole = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, :role_id)";
+            $stmtUserRole = $this->conn->prepare($sqlUserRole);
+            $stmtUserRole->bindParam(':user_id', $newUserId);
+            $stmtUserRole->bindParam(':role_id', $roleId);
+            $stmtUserRole->execute();
 
-        $this->conn->commit();
-        return true;
-
-    } catch (Exception $e) {
-        $this->conn->rollBack();
-        return false;
+            $this->conn->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            return false;
+        }
     }
-}
 
     // Read all users
     public function readAll()
@@ -62,7 +61,7 @@ public function create($name, $email, $password, $role)
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-  // Read user by ID
+    // Read user by ID
     public function readById($id)
     {
         $sql = "SELECT users.id, users.name, users.email, users.created_at, roles.name AS role

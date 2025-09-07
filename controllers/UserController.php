@@ -42,16 +42,6 @@ class UserController
         }
     }
 
-    /**
-     * Maneja la creación de un nuevo usuario desde el formulario de registro.
-     * Siempre asigna el rol 'user' por defecto.
-     * Retorna un array con el resultado.
-     *
-     * @param string $name
-     * @param string $email
-     * @param string $password
-     * @return array
-     */
     public function handleCreateUserFromRegister($name, $email, $password)
     {
         $role = 'user'; // Rol por defecto para el auto-registro
@@ -117,11 +107,11 @@ class UserController
             header('Location: ../views/access_denied.php'); // O la página que muestre el error
             exit();
         }
-    
+
         // ✅ Continuar con la actualización si los campos obligatorios están presentes
         if ($id && $name && $email) {
             $this->userModel->update($id, $name, $email, $password, $role);
-        
+
             if ($authenticatedUserRole === 'admin') {
                 header('Location: ../views/user_list.php');
             } else {

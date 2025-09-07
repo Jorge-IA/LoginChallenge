@@ -15,4 +15,3 @@ if ($auth->isLoggedIn()) {
     header('Location: ../views/login.php');
 }
 exit;
-?>
