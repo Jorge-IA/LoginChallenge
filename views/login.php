@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: dashboard.php');
         exit();
     } else {
-        $error = 'Credenciales inválidas. Si no tienes una cuenta, regístrate.';
+        $error = 'Credenciales inválidas.';
     }
 }
 ?>
@@ -29,6 +29,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../public/css/styles.css">
+
+    <style>
+        .password-toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+            cursor: pointer;
+            /* Hace que toda esta área sea un elemento en el que se puede hacer clic */
+        }
+
+        .password-toggle-container i {
+            margin-right: 5px;
+            color: #6c757d;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -59,6 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         <input type="password" class="form-control" id="password" name="password" required placeholder="••••••••">
                     </div>
+                    <br />
+                    <div class="password-toggle-container text-center" onclick="document.getElementById('show-password-toggle').click();">
+                        <i id="password-toggle-icon" class="fa fa-eye-slash"></i>
+                        <input type="checkbox" id="show-password-toggle" class="form-check-input visually-hidden">
+                        <label class="form-check-label" for="show-password-toggle">Ver contraseña</label>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100 mt-3">Entrar</button>
             </form>
@@ -85,6 +108,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 maxDistance: 15.00,
                 spacing: 15.00
             });
+        });
+
+        document.getElementById('show-password-toggle').addEventListener('change', function() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle-icon');
+            if (this.checked) {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
         });
     </script>
 </body>

@@ -43,6 +43,22 @@ if (isset($_GET['id'])) {
     <title><?= $editing ? "Editar Usuario" : "Crear Usuario"; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .password-toggle-container {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            cursor: pointer;
+            /* Hace que toda esta área sea un elemento en el que se puede hacer clic */
+        }
+
+        .password-toggle-container i {
+            margin-right: 5px;
+            color: #6c757d;
+        }
+    </style>
+
 </head>
 
 <body class="bg-light">
@@ -70,6 +86,12 @@ if (isset($_GET['id'])) {
                     <input type="password" class="form-control" id="password" name="password" <?= $editing ? "" : "required"; ?>>
                 </div>
 
+                <div class="mb-3 password-toggle-container" onclick="document.getElementById('show-password-toggle').click();">
+                    <i id="password-toggle-icon" class="fa fa-eye-slash"></i>
+                    <input type="checkbox" id="show-password-toggle" class="form-check-input visually-hidden">
+                    <label class="form-check-label" for="show-password-toggle">Ver contraseña</label>
+                </div>
+
                 <?php if ($isAdmin): ?>
                     <div class="mb-3">
                         <label for="role" class="form-label">Rol</label>
@@ -85,6 +107,23 @@ if (isset($_GET['id'])) {
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('show-password-toggle').addEventListener('change', function() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle-icon');
+            if (this.checked) {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
+
 </body>
 
 </html>
