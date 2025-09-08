@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             margin-top: 5px;
             cursor: pointer;
-            /* Hace que toda esta área sea un elemento en el que se puede hacer clic */
         }
 
         .password-toggle-container i {

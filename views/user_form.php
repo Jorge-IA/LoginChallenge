@@ -50,7 +50,6 @@ if (isset($_GET['id'])) {
             align-items: center;
             margin-top: 5px;
             cursor: pointer;
-            /* Hace que toda esta área sea un elemento en el que se puede hacer clic */
         }
 
         .password-toggle-container i {
